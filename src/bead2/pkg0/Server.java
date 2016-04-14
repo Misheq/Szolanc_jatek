@@ -14,7 +14,7 @@ public class Server {
         try {
             this.server = new ServerSocket(port);
             System.out.println("SERVER>> Server started on port " + port);
-            server.setSoTimeout(30000); // ezt hova kell tenni? valami ciklusba szerintem
+            server.setSoTimeout(30000);
             handleClients();
         } catch (IOException e) {
             System.out.println("SERVER>> Server stopped working beacause of idling");
@@ -23,6 +23,7 @@ public class Server {
 
     final void handleClients() throws IOException {
         while (true) {
+            
             Socket s1 = server.accept();
             //System.out.println("Player1 connected");
             Socket s2 = server.accept();
@@ -86,6 +87,7 @@ public class Server {
                 if (isPlayer1) {
                     msg = input1.nextLine();
                     if (msg.equals("exit")) {
+                        System.out.println("SERVER>> " + name2 + " nyert");
                         output2.println("nyert");
                         break;
                     }
@@ -94,6 +96,7 @@ public class Server {
                 } else {
                     msg = input2.nextLine();
                     if (msg.equals("exit")) {
+                        System.out.println("SERVER>> " + name1 + " nyert");
                         output1.println("nyert");
                         break;
                     }
