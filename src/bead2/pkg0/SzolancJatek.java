@@ -13,28 +13,27 @@ public class SzolancJatek {
                 new Server();
             }
         }.start();
-        synchronized (SzolancJatek.class) {
-            new Thread() {
-                @Override
-                public void run() {
-                    try {
-                        new RobotClient("Robot", "szokincs1.txt");
-                    } catch (IOException ex) {
-                        System.out.println("Robot client could not start");
-                    }
-                }
-            }.start();
 
-            new Thread() {
-                @Override
-                public void run() {
-                    try {
-                        new InteractiveClient();
-                    } catch (IOException ex) {
-                        System.out.println("player client could not start");
-                    }
+        new Thread() {
+            @Override
+            public void run() {
+                try {
+                    new RobotClient("Robot", "szokincs1.txt");
+                } catch (IOException ex) {
+                    System.out.println("Robot client could not start");
                 }
-            }.start();
-        }
+            }
+        }.start();
+
+        new Thread() {
+            @Override
+            public void run() {
+                try {
+                    new InteractiveClient();
+                } catch (IOException ex) {
+                    System.out.println("player client could not start");
+                }
+            }
+        }.start();
     }
 }
